@@ -114,7 +114,7 @@ main > #container > .coin{
     border-radius: 0.5vw;
 }
 
-.coin > div{
+.coin > label + div{
     margin-left: 2vw;
     margin-top: 1vw;
     margin-bottom: 2vw;
