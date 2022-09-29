@@ -13,15 +13,9 @@ header{
     position: sticky;
     top: 0;
     z-index: 3;
-    height: 10vw;
-    margin-right: 4vw;
-    margin-left: 4vw;
-    padding: 2.5vw;
-    border: 2px solid;
-}
-
-h1, img{
-    display: inline-block;
+    min-height: 20vw;
+    padding: 4vw;
+    border-bottom: 2px solid;
 }
 
 h1{
@@ -29,15 +23,10 @@ h1{
 }
 
 h1 + img{
-    width: 10vw;
-    position: absolute;
-    right: 0;
-    top: 4vw;
-    border: 2px solid rgba(0, 0, 0, 0.384) ;
-    border-top: transparent;
-    border-left: 2px solid rgba(0, 0, 0, 0.384) ;
+    display: none;    
 }
 /* --------------------------------------------- */
+
 
 main{
     margin: 4vw;
@@ -46,20 +35,13 @@ main{
 
 /* main head------------------------------------- */
 #mainHead{
-    padding-top: 2vw;
-    position: fixed;
-    top: 10vw;
-    background-color: white;
-    z-index: 2;
     margin-bottom: 0.3vw;
-    height: 7vw;
-    width: 100%;
 }
 
 
 nav{
-    display: inline-block;
     margin-left: 0.3vw;
+    margin-bottom: 1vw;
 }
 
 a{
@@ -85,83 +67,20 @@ a:hover{
     color: white;
 }
 
-#search{
-    position: absolute;
-    right: 50vw;
-    display: inline-block;
-}
-
 #search > button{
     background-color: transparent;
     border: 2px solid rgb(162, 240, 45);
     color: rgb(162, 240, 45);
 }
 /* --------------------------------------------------- */
-/* jumping window */
 
-aside{
-    z-index: 3;
-    position: fixed;
-    background-color: pink;
-    height: 25vw;
-    width: 25vw;
-    min-width: 350px;
-    min-height: 350px;
-    margin-left: 25vw;
-}
-
-aside > button{
-    background-color: transparent;
-    border: none;
-    font-size: larger;
-    font-weight: bold;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-bottom: 2px;
-}
-
-aside > span{
-    font-weight: bolder;
-    color: white;
-}
-
-aside > button:hover{
-    background-color: red;
-    border:  1px solid;
-}
-
-aside > div{
-    padding: 2vw;
-    /* text-align: center; */
-    font-weight: bolder;
-    background-color: pink;
-    color: white;
-    border: 1px dashed wheat;
-    height: 20%;
-}
-
-aside > div > button{
-    position: absolute;
-    right: 0;
-    /* margin-left: 8vw; */
-    border: none;
-    background-color: transparent;
-    color: blue;
-    text-decoration: underline;
-}
 
 /* spining coin ---------------------------------------*/
-#container > .placeHolder{
+#container > img{
+    border-radius: 50%;
     width: 33.33vw;
     height: 33.33vw;
     margin-left: 28vw;
-    animation: spin 3s linear infinite;
-}
-
-div > .smlPlaceHolder{
-    margin-left: 10vw;
-    max-height: 6vw;
-    max-width: 6vw;
     animation: spin 3s linear infinite;
 }
       
@@ -175,28 +94,20 @@ div > .smlPlaceHolder{
 
 
 /* main --------------------------------------------*/
-main > #container{
-    margin-top: 7vw;
-    display: flex;
-    flex-wrap: wrap;
-    /* text-align: center; */
-}
+
 
 main > #container > .coin{
     position: relative;
-    /* background-color: aqua; */
-    flex-grow: initial;
-    justify-content: space-evenly;
-    width: 28vw;
-    min-height: 9vw;
-    margin: 0.3vw;
+    width: 100%;
+    min-height: 30vw;
+    margin: 3vw;
     border: 1px solid black;
-    border-radius: 0.5vw;
+    border-radius: 3vw;
 }
 
 .coin > span{
-    margin-top: 1vw;
-    margin-left: 1vw;
+    margin-top: 2vw;
+    margin-left: 2vw;
     width: 3vw;
     font-size: medium;
     font-weight: bold;
@@ -204,34 +115,25 @@ main > #container > .coin{
 }
 
 .coin > label + div{
-    margin-left: 1vw;
-    margin-top: 0.5vw;
-    margin-bottom: 1vw;
+    margin-left: 2vw;
+    margin-top: 3vw;
+    margin-bottom: 5vw;
 }
 
 .coin > button{
-    margin-left: 1vw;
-    margin-bottom: 1vw;
+    margin-left: 2vw;
 }
 
-
 .coin > button + div{
-    font-weight: bold;
-    background-color: #888;
-    color: white;
-    text-align: center;
     border-radius: 3px;
-    margin-left: 1vw;
-    width: 24vw;
+    margin-left: 2vw;
+    width: 50vw;
     margin-top: 0;
-    margin-bottom: 0.5vw;
-    height: 6vw;
-    background-size: initial;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    border: 1px solid;
-    background-repeat: no-repeat;
+    margin-bottom: 2vw;
+    /* max-height: 15vw; */
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 .coin > div > span{
