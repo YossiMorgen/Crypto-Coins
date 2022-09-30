@@ -1,37 +1,43 @@
 let fiveCoins = [];
 hideAside();
-get_data("https://api.coingecko.com/api/v3/coins/list", creatCoins);
+let coins = [];
+$.ajax({
+    url: "https://api.coingecko.com/api/v3/coins/list",
+    success: data => {
+        coins = data.slice(0, 100);
+        creatCoins(coins);
+    },
+    error: err => console.log(err)
+});
 
 function creatCoins(data){
-    const coins = data.slice(0, 100)
-    console.log(coins);
     $("#container").html("")
     let html = "";
-    coins.forEach(coin => {
-        html += (`<div class="coin">
+    data.forEach(coin => {
+        // console.log(coin.name.replace(/./g,'').replace(/ /g,''));
+        html += (`
+        <div class="coin">
             <span>${coin.name}</span>
-
-            <label id="${coin.name}" onchange="chartList(this)" class="switch">
-                <input type="checkbox">
+            <label onchange="chartList(this)" class="switch">
+                <input id="${coin.name}" type="checkbox">
                 <span class="slider"></span>
             </label>
 
             <div>${coin.symbol}</div>
 
             <button id="${coin.id}" onclick="findInfo(this)" class="btn btn-primary" type="button">more info</button>
-            </div>
         </div>`)
     });
     $("#container").html(html);
 }
 
+
 function chartList(slider){
-    const id = $(slider).attr('id');
+    const id = $(slider).children("input").attr('id');
     if((fiveCoins.findIndex(coin => coin === id)) === -1){
-        if(fiveCoins.length >= 2){
+        if(fiveCoins.length >= 5){
             $(slider).children("input").prop('checked', false);
-            showJumpingWindow()
-            alert("too mach coins..."); return;
+            showJumpingWindow(); return;
         }
         fiveCoins.push(id);
     }else{
@@ -41,18 +47,34 @@ function chartList(slider){
 }
 
 function showJumpingWindow(){
-    $("aside").html(`<button onclick="hideAside()">x</button>`);
+    let html = ""
     fiveCoins.forEach(coin => {        
-        $("aside").show(500).append(`<div><span>${coin}</span><button onclick="DeleteFromFiveCoins(this)">remove</button></div>`)
+        html += `<div><span>${coin}</span><button onclick="DeleteFromFiveCoins(this)">remove</button></div>`
     })
-
+    $("aside").show(500).children("section").html(html)
 }
 function DeleteFromFiveCoins(btn){
     let id = $(btn).siblings("span").text();
     fiveCoins = fiveCoins.filter(coin => coin !== id);
     hideAside();
-    $(`#${id}`).children("input").prop('checked', false);
+    document.getElementById(id).checked = false;
+    // $(`#${id}`).children("input").prop('checked', false);
+    console.log(fiveCoins);
 }
+// (()=>{
+// })()
+
+// function search(){
+//     let inp = $("input").val();
+//     if(inp.length < 2) {
+//         console.log("Too Short");
+//         return;
+//     }    
+//     let searchData = coins.filter(coin => )
+//     console.log(searchData);
+//     ShowResults(searchData)
+// }
+
 
 // find the faster and trutworthy way to get information about the coin
 function findInfo(btn) {
@@ -120,6 +142,7 @@ function getInfo(){
 function hideAside(){
     $("aside").hide();
 }
+
 
 
 

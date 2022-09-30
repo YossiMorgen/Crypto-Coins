@@ -25,7 +25,7 @@ h1, img{
 }
 
 h1{
-    color: white;
+    font-family: 'Nabla', cursive;
 }
 
 h1 + img{
@@ -110,6 +110,13 @@ aside{
     margin-left: 25vw;
 }
 
+
+aside > span{
+    color: red;
+    padding-left: 5px;
+    font-family: 'Fjalla One', sans-serif;
+}
+
 aside > button{
     background-color: transparent;
     border: none;
@@ -120,17 +127,12 @@ aside > button{
     padding-bottom: 2px;
 }
 
-aside > span{
-    font-weight: bolder;
-    color: white;
-}
-
 aside > button:hover{
     background-color: red;
     border:  1px solid;
 }
 
-aside > div{
+aside > section > div{
     padding: 2vw;
     /* text-align: center; */
     font-weight: bolder;
@@ -140,7 +142,7 @@ aside > div{
     height: 20%;
 }
 
-aside > div > button{
+aside > section > div > button{
     position: absolute;
     right: 0;
     /* margin-left: 8vw; */
