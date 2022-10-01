@@ -60,6 +60,7 @@ main{
 nav{
     display: inline-block;
     margin-left: 0.3vw;
+    z-index: 9;
 }
 
 a{
@@ -68,6 +69,7 @@ a{
     color: blue;
     font-weight: bold;
     padding: 0.3vw;
+    z-index: 9;
 }
 
 a:hover{
@@ -161,7 +163,7 @@ aside > section > div > button{
 }
 
 div > .smlPlaceHolder{
-    margin-left: 10vw;
+    margin-left: 3vw;
     max-height: 6vw;
     max-width: 6vw;
     animation: spin 3s linear infinite;
@@ -256,34 +258,6 @@ main > #container > .coin{
     background: #555; 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* toggle button ---------------------------------------------------------- */
 
 .switch {
@@ -339,4 +313,23 @@ main > #container > .coin{
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);  }
-  
+
+/* the about page */
+/* #about{
+    position: relative;
+} */
+
+#about > img{
+    width: 50%;
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 30%;
+    height: 100;
+    width: 100%;
+    z-index: 4; */
+}
+
+#about > h2, #about > div{
+    text-decoration: double;
+}
