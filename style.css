@@ -75,13 +75,13 @@ a:hover{
     cursor: pointer;
 }
 
-.chosen{
+.active{
     background-color: blue;
     color: white;
     font-weight: normal;
 }
 
-.chosen:hover{
+.active:hover{
     color: white;
 }
 

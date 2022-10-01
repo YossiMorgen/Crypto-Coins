@@ -24,26 +24,34 @@
     </header>
 
     <main>
-        <section id="mainHead">
-            <nav>
-                <a class="chosen" href="">Home</a>
-                <a href="">Live Report</a>
-                <a href="">About</a>
-            </nav>
+        <div id="app"></div>
+        <!-- <section id="mainHead">
+            
             <div id="search">
                 <input type="search">
-                <button>search</button>
+                <button onclick="search()">search</button>
             </div>
-        </section>
-        <aside>
+        </section> -->
+         <aside>
             <button onclick="hideAside()">x</button>
             <span>you can choose max five coins at a time..</span>
             <section></section>
-        </aside>
+        </aside> 
 
         <section id="container">
-            <img class="placeHolder" src="bitcoin.png" alt="loading...">
-        </section>
+            <!-- <img class="placeHolder" src="bitcoin.png" alt="loading...">  -->
+            <!-- <div class="coin">
+                <span>${coin.name}</span>
+                <label onchange="chartList(this)" class="switch">
+                    <input id="${coin.name}" type="checkbox">
+                    <span class="slider"></span>
+                </label>
+    
+                <div>${coin.symbol}</div>
+    
+                <button id="${coin.id}" onclick="findInfo(this)" class="btn btn-primary" type="button">more info</button>
+            </div> -->
+         </section>
     </main>
 
     
