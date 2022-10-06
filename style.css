@@ -321,6 +321,7 @@ main > #container > .coin{
 
 #about > img{
     width: 50%;
+    /* tried to do it with opacity all hover the page but it blocked the nav and i coudn't fix it with z-index */
     /* position: fixed;
     top: 0;
     left: 0;
@@ -332,4 +333,10 @@ main > #container > .coin{
 
 #about > h2, #about > div{
     text-decoration: double;
+}
+
+/* chart */
+#chartContainer{
+    height: 370px;
+    width: 100%;
 }

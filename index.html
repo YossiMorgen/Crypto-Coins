@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto project</title> 
     <link rel="icon" type="png" href="assets/bitcoin.png" />
+    <script defer src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script defer src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script defer src="jquery.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>    
     <script defer src="script.js"></script>
@@ -31,15 +33,17 @@
             <div id="search">
                 <input type="search">
                 <button onclick="search()">search</button>
-            </div>
+            </div> 
         </section> -->
-         <aside>
-            <button onclick="hideAside()">x</button>
+
+        <aside>
+            <button onclick="hideAside()">x</button> 
             <span>you can choose max five coins at a time..</span>
             <section></section>
         </aside> 
 
-        
+        <!-- <img class="placeHolder" src="assets/bitcoin.png" alt="loading...">  -->
+
 
         <section id="container">
             <!-- <section id="about">
@@ -49,7 +53,6 @@
                     <div>this project first show list of 100 coins toggle button and info button</div>
                     <div>with the toggle button you'll be able to choose five coins to get even more information</div>
             </section> -->
-            <!-- <img class="placeHolder" src="assets/bitcoin.png" alt="loading...">  -->
             <!-- <div class="coin">
                 <span>${coin.name}</span>
                 <label onchange="chartList(this)" class="switch">
@@ -64,6 +67,6 @@
          </section>
     </main>
 
-    
+   
 </body>
 </html>
