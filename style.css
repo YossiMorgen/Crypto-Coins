@@ -4,8 +4,14 @@
 
 
 html, body{
+    margin-left: 3vw;
+    margin-right: 3vw;
     box-sizing: border-box;
     position: relative;
+}
+
+.hide{
+    display: none;
 }
 /*header-----------------------------------------*/
 header{
@@ -14,10 +20,9 @@ header{
     top: 0;
     z-index: 3;
     height: 10vw;
-    margin-right: 4vw;
-    margin-left: 4vw;
     padding: 2.5vw;
-    border: 2px solid;
+    border: 2px solid rgb(110, 108, 108);
+    border-radius: 5px;
 }
 
 h1, img{
@@ -31,41 +36,45 @@ h1{
 h1 + img{
     width: 10vw;
     position: absolute;
-    right: 0;
+    right: -2px;
     top: 4vw;
     border: 2px solid rgba(0, 0, 0, 0.384) ;
     border-top: transparent;
-    border-left: 2px solid rgba(0, 0, 0, 0.384) ;
 }
 /* --------------------------------------------- */
 
 main{
-    margin: 4vw;
+    margin-left: 0.5vw;
     margin-top: 5vw;
+    margin-right: 4vw;
+    padding-right: 4vw;
 }
 
 /* main head------------------------------------- */
 #mainHead{
+    background-color: white;
     padding-top: 2vw;
     position: fixed;
     top: 10vw;
-    background-color: white;
     z-index: 2;
     margin-bottom: 0.3vw;
     height: 7vw;
-    width: 100%;
+    width: 86.5%;
+    box-shadow: inset -3px 0 5px 4px #888;
+    /* box-shadow: inset 3px -4px 9px 3px; */
+    border-radius: 0 0 10px 10px;
 }
 
 
 nav{
     display: inline-block;
-    margin-left: 0.3vw;
+    margin-left: 1vw;
     z-index: 9;
 }
 
 a{
     text-decoration: none;
-    background-color: white;
+    background-color: transparent;
     color: blue;
     font-weight: bold;
     padding: 0.3vw;
@@ -88,8 +97,9 @@ a:hover{
 }
 
 #search{
-    position: absolute;
-    right: 50vw;
+    /* position: absolute; */
+    /* right: 50vw; */
+    margin-left: 45%;
     display: inline-block;
 }
 
@@ -105,10 +115,11 @@ aside{
     z-index: 3;
     position: fixed;
     background-color: pink;
-    height: 25vw;
+    display: block;
+    /* height: 10hw; */
     width: 25vw;
     min-width: 350px;
-    min-height: 350px;
+    /* min-height: 350px; */
     margin-left: 25vw;
 }
 
@@ -135,13 +146,13 @@ aside > button:hover{
 }
 
 aside > section > div{
-    padding: 2vw;
+    padding: 1.5vw;
     /* text-align: center; */
     font-weight: bolder;
     background-color: pink;
     color: white;
     border: 1px dashed wheat;
-    height: 20%;
+    /* height: 20%; */
 }
 
 aside > section > div > button{
@@ -155,10 +166,11 @@ aside > section > div > button{
 }
 
 /* spining coin ---------------------------------------*/
-#container > .placeHolder{
-    width: 33.33vw;
-    height: 33.33vw;
-    margin-left: 28vw;
+.placeHolder{
+    width: 25vw;
+    height: 25vw;
+    margin-left: 32vw;
+    margin-top: 4vw;
     animation: spin 3s linear infinite;
 }
 
@@ -179,23 +191,28 @@ div > .smlPlaceHolder{
 
 
 /* main --------------------------------------------*/
-main > #container{
-    margin-top: 7vw;
+main > #container, main > #about{
+    margin-top: 8vw;
     display: flex;
     flex-wrap: wrap;
+    margin-left: 1.5vw;
+    margin-right: -6vw;
     /* text-align: center; */
 }
 
 main > #container > .coin{
     position: relative;
     /* background-color: aqua; */
+
     flex-grow: initial;
     justify-content: space-evenly;
-    width: 28vw;
+    flex-basis: 32.5%;
     min-height: 9vw;
     margin: 0.3vw;
+    margin-top: 0.8vw;
     border: 1px solid black;
     border-radius: 0.5vw;
+    box-shadow:  -4px 8px 8px 5px #888;
 }
 
 .coin > span{
@@ -220,6 +237,7 @@ main > #container > .coin{
 
 
 .coin > button + div{
+    text-align: center;
     font-weight: bold;
     background-color: #888;
     color: white;
@@ -238,7 +256,15 @@ main > #container > .coin{
     background-repeat: no-repeat;
 }
 
-.coin > div > span{
+.coin > button + div > img{
+    /* height: 100%; */
+    width: 28%;
+    margin: 0 36%;
+    margin-bottom: 0;
+    display: block;
+}
+
+/* .coin > div > span{
     background-color: yellow;
     border: transparent;
 }
@@ -256,7 +282,7 @@ main > #container > .coin{
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
-}
+} */
 
 /* toggle button ---------------------------------------------------------- */
 
@@ -315,24 +341,20 @@ main > #container > .coin{
     transform: translateX(26px);  }
 
 /* the about page */
-/* #about{
-    position: relative;
-} */
 
+#about{
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+}
 #about > img{
-    width: 50%;
-    /* tried to do it with opacity all hover the page but it blocked the nav and i coudn't fix it with z-index */
-    /* position: fixed;
+    position: fixed;
     top: 0;
     left: 0;
     opacity: 30%;
     height: 100;
     width: 100%;
-    z-index: 4; */
-}
-
-#about > h2, #about > div{
-    text-decoration: double;
+    z-index: -1;
 }
 
 /* chart */
