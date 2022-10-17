@@ -1,11 +1,15 @@
-/* *{
+*{
     box-sizing: border-box;
-} */
+}
 
 
 html, body{
     box-sizing: border-box;
     position: relative;
+}
+
+.hide{
+    display: none;
 }
 /*header-----------------------------------------*/
 header{
@@ -13,43 +17,51 @@ header{
     position: sticky;
     top: 0;
     z-index: 3;
-    min-height: 20vw;
-    padding: 4vw;
-    border-bottom: 2px solid;
+    height: 15vw;
+    padding: 2vw;
+    border-radius: 5px;
 }
 
 h1{
-    color: white;
+    font-family: 'Nabla', cursive;
 }
 
 h1 + img{
-    display: none;    
+    display: none;
 }
 /* --------------------------------------------- */
 
-
 main{
-    margin: 4vw;
-    margin-top: 5vw;
+    margin-top: 13vh;
 }
 
 /* main head------------------------------------- */
 #mainHead{
+    background-color: white;
+    padding-top: 1vw;
+    position: fixed;
+    top: 15vw;
+    z-index: 2;
     margin-bottom: 0.3vw;
+    height: 18vw;
+    width: 100%;
+    box-shadow: inset -3px 0 5px 4px #888;
+    border-radius: 0 0 10px 10px;
 }
 
 
 nav{
-    margin-left: 0.3vw;
-    margin-bottom: 1vw;
+    margin-left: 1vw;
+    z-index: 9;
 }
 
 a{
     text-decoration: none;
-    background-color: white;
+    background-color: transparent;
     color: blue;
     font-weight: bold;
     padding: 0.3vw;
+    z-index: 9;
 }
 
 a:hover{
@@ -57,14 +69,18 @@ a:hover{
     cursor: pointer;
 }
 
-.chosen{
+.active{
     background-color: blue;
     color: white;
     font-weight: normal;
 }
 
-.chosen:hover{
+.active:hover{
     color: white;
+}
+
+#search{
+    margin: 1.5vw;
 }
 
 #search > button{
@@ -75,12 +91,73 @@ a:hover{
 /* --------------------------------------------------- */
 
 
+/* jumping window */
+
+aside{
+    z-index: 3;
+    position: fixed;
+    background-color: pink;
+    display: block;
+    width: 25vw;
+    min-width: 60%;
+    margin-left: 14%;
+}
+
+
+aside > span{
+    color: red;
+    padding-left: 5px;
+    font-family: 'Fjalla One', sans-serif;
+}
+
+aside > button{
+    background-color: transparent;
+    border: none;
+    font-size: larger;
+    font-weight: bold;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+}
+
+aside > button:hover{
+    background-color: red;
+    border:  1px solid;
+}
+
+aside > section > div{
+    padding: 1.5vw;
+    /* text-align: center; */
+    font-weight: bolder;
+    background-color: pink;
+    color: white;
+    border: 1px dashed wheat;
+    /* height: 20%; */
+}
+
+aside > section > div > button{
+    position: absolute;
+    right: 0;
+    /* margin-left: 8vw; */
+    border: none;
+    background-color: transparent;
+    color: blue;
+    text-decoration: underline;
+}
+
 /* spining coin ---------------------------------------*/
-#container > img{
-    border-radius: 50%;
-    width: 33.33vw;
-    height: 33.33vw;
-    margin-left: 28vw;
+.placeHolder{
+    width: 25vw;
+    height: 25vw;
+    margin-left: 32vw;
+    margin-top: 4vw;
+    animation: spin 3s linear infinite;
+}
+
+div > .smlPlaceHolder{
+    margin-left: 3vw;
+    max-height: 6vw;
+    max-width: 6vw;
     animation: spin 3s linear infinite;
 }
       
@@ -94,20 +171,25 @@ a:hover{
 
 
 /* main --------------------------------------------*/
-
+main > #container, main > #about{
+    /* margin: 3px; */
+    /* margin-top: 3vw; */
+    flex-direction: column-reverse;
+}
 
 main > #container > .coin{
+    display: block;
     position: relative;
-    width: 100%;
-    min-height: 30vw;
-    margin: 3vw;
+    margin: 2vw;
+    margin-top: 0.8vw;
     border: 1px solid black;
-    border-radius: 3vw;
+    border-radius: 10px;
+    box-shadow:  -4px 8px 8px 5px #888;
 }
 
 .coin > span{
-    margin-top: 2vw;
-    margin-left: 2vw;
+    margin-top: 1vw;
+    margin-left: 1vw;
     width: 3vw;
     font-size: medium;
     font-weight: bold;
@@ -115,81 +197,51 @@ main > #container > .coin{
 }
 
 .coin > label + div{
-    margin-left: 2vw;
-    margin-top: 3vw;
-    margin-bottom: 5vw;
+    margin-left: 1vw;
+    margin-top: 0.5vw;
+    margin-bottom: 1vw;
 }
 
 .coin > button{
-    margin-left: 2vw;
+    margin-left: 1vw;
+    margin-bottom: 1vw;
 }
+
 
 .coin > button + div{
+    text-align: center;
+    font-weight: bold;
+    background-color: #888;
+    color: white;
+    text-align: center;
     border-radius: 3px;
-    margin-left: 2vw;
-    width: 50vw;
+    margin-left: 1vw;
+    width: 24vw;
     margin-top: 0;
-    margin-bottom: 2vw;
-    /* max-height: 15vw; */
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
+    margin-bottom: 0.5vw;
+    height: 6vw;
+    background-size: initial;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border: 1px solid;
+    background-repeat: no-repeat;
 }
 
-.coin > div > span{
-    background-color: yellow;
-    border: transparent;
+.coin > button + div > img{
+    /* height: 100%; */
+    width: 28%;
+    margin: 0 36%;
+    margin-bottom: 0;
+    display: block;
 }
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888; 
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* toggle button ---------------------------------------------------------- */
 
 .switch {
     position: absolute;
     display: inline-block;
-    right: 0;
+    right: 5px;
     width: 60px;
     height: 34px; 
     top: 2.5vw;
@@ -239,4 +291,29 @@ main > #container > .coin{
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);  }
-  
+
+/* the about page */
+
+#about{
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    margin-top: 8vw;
+    margin-left: 1.5vw;
+    max-width: 800px;
+}
+#about > img{
+    position: fixed;
+    top: 0;
+    left: -50%;    
+    opacity: 30%;
+    min-height: 100vh;
+    min-width: 100vw;
+    z-index: -1;
+}
+
+/* chart */
+#chartContainer{
+    height: 370px;
+    width: 100%;
+}

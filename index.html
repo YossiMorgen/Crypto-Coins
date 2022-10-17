@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto project</title> 
     <link rel="icon" type="png" href="assets/bitcoin.png" />
-    <script defer src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-    <script defer src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script defer src="jquery.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>    
+    
+    <script defer src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script defer src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script defer src="script.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="icon" href="bitcoin.png">
-    <link rel="stylesheet" href="style.css" media="screen and (min-device-width: 500px)">
+    <link rel="stylesheet" href="style.css" media="screen and (min-device-width: 800px)">
+    <link rel="stylesheet" href="tablet.css" media="screen and (min-device-width: 500px) and (max-device-width: 800px)">
     <link rel="stylesheet" href="mobile.css" media="screen and (max-device-width: 500px)">
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
     <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
@@ -28,16 +30,9 @@
 
     <main>
         <div id="app"></div>
-        <!-- <section id="mainHead">
-            
-            <div id="search">
-                <input type="search">
-                <button onclick="search()">search</button>
-            </div> 
-        </section> -->
 
         <aside class="hide">
-            <button onclick="hideAside()">x</button> 
+            <button>x</button>
             <span>you can choose max five coins at a time..</span>
             <section></section>
         </aside> 
@@ -45,8 +40,11 @@
         <img class="placeHolder" src="assets/bitcoin.png" alt="loading..."> 
 
         <section id="container"> </section>
+
         <section id="about"></section>
-        
+
+        <div id="chartContainer"></div>
+
     </main>
 
    
