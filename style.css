@@ -342,6 +342,7 @@ main > #container > .coin{
 
 #chartContainer > h2{
     color: red;
+    cursor: pointer;
 }
 
 #chartContainer a:hover{

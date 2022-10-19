@@ -1,6 +1,7 @@
 "use strict";
 const url = new URL(window.location);
 moveTo(url.hash);
+// רציתי לקבוע פה את כל המערכים ולקרוא לכל האלמנטים אבל הבעיה שהפונקציות לא זיהו אותם
 window.addEventListener('popstate', e => moveTo(e.state.target))
 let container = document.getElementById("container");
 
@@ -21,9 +22,10 @@ function moveTo(target) {
     let html;
     switch (target) {
         case '#home': home(); break;
-        case '#about': html =  about(); break;
-        case '#liveReport': html = liveReport(); break;
-        default: html = home(); break;
+        case '#about': about(); break;
+        case '#liveReport': liveReport(); break;
+        default: document.querySelector("nav > a").className = "active"; home(); break;
+             
     }
 }
 document.querySelector("aside > button").addEventListener("click", ()=> hide("aside"))
@@ -57,7 +59,6 @@ async function liveReport() {
     show("#chartContainer");
     let chartContainer = document.getElementById("chartContainer")
     chartContainer.innerHTML = "";
-    console.log(chartContainer);
     if(infoArr.length === 0){
         hide(".placeHolder")
         let h2 = document.createElement("h2")
@@ -141,13 +142,11 @@ async function liveReport() {
                 try {
                     for (let i = 0; i < data.length; i++) {
                         let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${infoArr[i][1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
-                        console.log(result);
                         if(typeof (result.USD) !=="undefined"){
                             data[i].dataPoints.push({
                                 x: new Date().getTime(),
                                 y: result.USD,
                             })
-                            console.log(data[i]);
                         }
                     }
                 } catch (error) {
@@ -160,7 +159,6 @@ async function liveReport() {
                 }
             }
         }, 3000)
-    console.log(data);
 }
 
 async function home() {
@@ -170,7 +168,6 @@ async function home() {
     container.style.display = "flex";
     div.id = "search";
     let coins = [];
-    console.log(coins);
     document.getElementById("mainHead").appendChild(div);
     let search = document.createElement("input");
     search.type = "search";
@@ -184,7 +181,7 @@ async function home() {
     })
     btn.addEventListener("click", ()=>{
         let inp = $("input").val();
-        if(inp.length < 2) {
+        if(inp.length < 15) {
             alert("Too Short");
             return;
         }
@@ -202,11 +199,6 @@ async function home() {
     // }
     show(".placeHolder");
     
-
-
-
-    
-    console.log(coins);
     if(coins.length === 0){
         try {
             coins = await getData('https://api.coingecko.com/api/v3/coins/list');
@@ -221,7 +213,6 @@ async function home() {
 
 function creatCoins(data){
     let currentCoins = data.slice(0, 100)
-    console.log(currentCoins);
     hide(".placeHolder");
     currentCoins.forEach(coin => {
         let div = document.createElement("div");
@@ -270,7 +261,6 @@ function creatCoins(data){
 
                 let coinsInfo = getInfo("coinsInfo");
                 let info  = coinsInfo.find(coinInfo => coinInfo.id == coin.name);
-                console.log(info);
                 if(info){
                     if((new Date().toString().slice(0, 21)) === info.time && new Date().getMinutes() -  info.minuts <= 2){
                         showInfo(info, div3);
@@ -286,15 +276,10 @@ function creatCoins(data){
         div.appendChild(div3);
     })
     let fiveCoins = getInfo("fiveCoins");
-    console.log(fiveCoins);
     fiveCoins.forEach(arrCoin => {
-        console.log(arrCoin);
         for (const checkCoin of document.getElementsByClassName(arrCoin[0])) {
-            console.log(checkCoin);
-            if (checkCoin.className === arrCoin[0]) 
-                checkCoin.checked = "true";
-            }
-        console.log(arrCoin);
+            checkCoin.className === arrCoin[0] && (checkCoin.checked = "true")
+        }
     })
 }
 
@@ -306,7 +291,6 @@ async function addInfo(div, coin){
     } catch (error) {
         console.log(error);
     }
-    console.log(info);
     let infoArray = getInfo(`coinsInfo`);
     const information = {
         "time": new Date().toString().slice(0, 21),
@@ -325,7 +309,6 @@ async function addInfo(div, coin){
 // show the coin's information on the collapse div
 function showInfo(info, div){
     if(typeof (info.eur) === "undefined"){
-        console.log("undefined");
         div.innerHTML = `sorry we can't find the info you wanted`
         div.style.color = "red"
         return;
@@ -339,7 +322,6 @@ function showInfo(info, div){
 // manage the five coins's list
 function fiveCoinsList(input, coin){
     let fiveCoins = getInfo("fiveCoins");
-    console.log(fiveCoins);
     if(document.querySelector("aside").className !== "hide"){
         input.checked = !(input.checked); return;
     }
@@ -374,7 +356,6 @@ function showJumpingWindow(fiveCoins, nextBtn, symbol){
             fiveCoins.push([nextBtn.className, symbol]);
             fiveCoins = fiveCoins.filter(arrCoin => arrCoin[0] !== coin[0]);
             saveInfo(fiveCoins, "fiveCoins")
-            console.log(fiveCoins);
             hide("Aside");
             let oldSlider = document.getElementsByClassName(coin[0])[0];
             if(oldSlider){
