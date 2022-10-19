@@ -241,7 +241,7 @@ main > #container > .coin{
     width: 24vw;
     margin-top: 0;
     margin-bottom: 0.5vw;
-    height: 6vw;
+    /* height: 6vw; */
     background-size: initial;
     background-position: bottom;
     background-repeat: no-repeat;

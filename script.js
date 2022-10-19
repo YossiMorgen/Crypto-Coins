@@ -164,18 +164,13 @@ async function liveReport() {
 }
 
 async function home() {
+    let container = document.querySelector("#container");
     document.querySelector("#about").innerHTML = " ";
     let div = document.createElement("div");
-    document.querySelector("#container").style.display = "flex";
+    container.style.display = "flex";
+    div.id = "search";
     let coins = [];
     console.log(coins);
-    if(document.querySelector("#container").innerHTML !== " "){ 
-        hide(".placeHolder");
-        return;
-    }
-    show(".placeHolder");
-    
-    div.id = "search";
     document.getElementById("mainHead").appendChild(div);
     let search = document.createElement("input");
     search.type = "search";
@@ -183,11 +178,10 @@ async function home() {
     btn.innerText = "search";
     search.addEventListener("change", ()=>{
         if(document.querySelector("input").value == ""){
-            document.querySelector("#container").innerHTML = " ";
+            container.innerHTML = " ";
             creatCoins(coins);
         }
     })
-
     btn.addEventListener("click", ()=>{
         let inp = $("input").val();
         if(inp.length < 2) {
@@ -196,11 +190,20 @@ async function home() {
         }
         show(".placeHolder");
         let searchCoins = coins.filter(coin => coin.name.search(inp) != -1);
-        document.querySelector("#container").innerHTML = " ";
+        container.innerHTML = " ";
         creatCoins(searchCoins)
         })
     div.appendChild(search);
     div.appendChild(btn); 
+
+    // if(container.innerHTML !== " "){ 
+    //     hide(".placeHolder");
+    //     return;
+    // }
+    show(".placeHolder");
+    
+
+
 
     
     console.log(coins);
