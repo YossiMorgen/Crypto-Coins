@@ -15,9 +15,7 @@ function navTo(el) {
 
 function moveTo(target) {
     hide("#chartContainer")
-
     document.querySelector("#container").style.display = "none";
-    // document.querySelector("#chartContainer").style.display = "none";
     document.querySelector("#about").innerHTML = " ";
     app.innerHTML = nav();
     let html;
@@ -55,112 +53,128 @@ function about() {
 }
 
 async function liveReport() {
-    document.querySelector("#about").innerHTML = " ";
-    document.querySelector("#container").style.display = "none";
+    let infoArr = getInfo("fiveCoins");
+    show("#chartContainer");
+    let chartContainer = document.getElementById("chartContainer")
+    chartContainer.innerHTML = "";
+    console.log(chartContainer);
+    if(infoArr.length === 0){
+        hide(".placeHolder")
+        let h2 = document.createElement("h2")
+        h2.innerText = "you need to choose some coins from the home page"
+        chartContainer.appendChild(h2)
+        h2.addEventListener("click",()=>{
+            document.getElementsByTagName("a")[0].click();
+            chartContainer.removeChild(h2);
+        })
+
+        return;
+    }
     show(".placeHolder");
-    let fiveCoins = getInfo("fiveCoins");
-    let infoArr = new Array(fiveCoins.length)
-    show("#chartContainer")
-    for(let i = 0; i < fiveCoins.length; i++){
+    
+    var data = [];
+	var chart;
+    for(let i = 0; i < infoArr.length; i++){
         try {
-            let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${fiveCoins[i][1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
-            infoArr[i] = [{
-                x: new Date().getTime(),
-                y: result.USD,
-            }]
-            callChar()        
+            let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${infoArr[i][1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
+            if(typeof (result.USD) !=="undefined"){
+                data.push({
+                    type: "spline",
+                    name: infoArr[i][1],
+                    showInLegend: true,
+                    xValueType: "dateTime",
+                    xValueFormatString: "DD MMM hh:mm TT",
+                    dataPoints: [{
+                    x: new Date().getTime(),
+                    y: result.USD,
+                    }]
+                })
+            }
         } catch (error) {
             console.log(error);
         }
     };
-    console.log(infoArr);
-    let j = 0;
-    let interval = setInterval(async() => {
-        
-        for(let i = 0; i < fiveCoins.length; i++){
-            try {
-                let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${fiveCoins[i][1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
-                infoArr[i].push({
-                    x: new Date().getTime(),
-                    y: result.USD,
-                })
-            } catch (error) {
-                console.log(error);
-            }
-            
-        }
-        j ++;
-        if(j >= 10){
-            clearInterval(interval);
-        }
-        callChar()
+    hide(".placeHolder")
+    chart = new CanvasJS.Chart("chartContainer",{
+        exportEnabled: true,
+        animationEnabled: true,
+        title:{
+            text: "Coins Live Report"
+        },
+        subtitles: [{
+            text: "Click Legend to Hide or Show Coin Data"
+        }],
+        axisX: {
+            title: "States",
+            labelFormatter: function ( e ) {
+                return e.value;  
+            },
+        },
+        axisY: {
+            title: "Coins's Price",
+            titleFontColor: "#4F81BC",
+            lineColor: "#4F81BC",
+            labelFontColor: "#4F81BC",
+            tickColor: "#4F81BC"
+        },
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor: "pointer",
+            itemclick: toggleDataSeries,
+        },
+        data:   data,
+    });
 
-    }, 2000);
-    
-    function callChar(){
-        let data = []
-        for (let index = 0; index < fiveCoins.length; index++) {
-            if(infoArr[index][0].y){
-                let arr = {
-                type: "spline",
-                name: fiveCoins[index][1],
-                showInLegend: true,
-                xValueType: "dateTime",
-                xValueFormatString: "DD MMM hh:mm TT",
-                dataPoints:  infoArr[index],
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else {
+            e.dataSeries.visible = true;
+        }
+        e.chart.render();
+    }
+        let j = 0;
+        let interval = setInterval(async() => {
+            for(let i = 0; i < infoArr.length; i++){
+                try {
+                    for (let i = 0; i < data.length; i++) {
+                        let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${infoArr[i][1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
+                        console.log(result);
+                        if(typeof (result.USD) !=="undefined"){
+                            data[i].dataPoints.push({
+                                x: new Date().getTime(),
+                                y: result.USD,
+                            })
+                            console.log(data[i]);
+                        }
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
-                data.push(arr);
+                chart.render();
+                j ++;
+                if(j >= 3){
+                    clearInterval(interval);
+                }
             }
-        }
-        
-        let options = {
-            exportEnabled: true,
-            animationEnabled: true,
-            title:{
-                text: "Coins Live Report"
-            },
-            subtitles: [{
-                text: "Click Legend to Hide or Show Coin Data"
-            }],
-            axisX: {
-                title: "States",
-                labelFormatter: function ( e ) {
-                    return "x: " + e.value;
-                },
-            },
-            axisY: {
-                title: "Coins's Price",
-                titleFontColor: "#4F81BC",
-                lineColor: "#4F81BC",
-                labelFontColor: "#4F81BC",
-                tickColor: "#4F81BC"
-            },
-            toolTip: {
-                shared: true
-            },
-            legend: {
-                cursor: "pointer",
-                itemclick: toggleDataSeries,
-            },
-            data:  data,
-        };
-        console.log(options);
-        $("#chartContainer").CanvasJSChart(options);
-        hide(".placeHolder")
-        function toggleDataSeries(e) {
-            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-            } else {
-                e.dataSeries.visible = true;
-            }
-            e.chart.render();
-        }
-    }          
+        }, 3000)
+    console.log(data);
 }
 
 async function home() {
     document.querySelector("#about").innerHTML = " ";
     let div = document.createElement("div");
+    document.querySelector("#container").style.display = "flex";
+    let coins = [];
+    console.log(coins);
+    if(document.querySelector("#container").innerHTML !== " "){ 
+        hide(".placeHolder");
+        return;
+    }
+    show(".placeHolder");
+    
     div.id = "search";
     document.getElementById("mainHead").appendChild(div);
     let search = document.createElement("input");
@@ -188,14 +202,6 @@ async function home() {
     div.appendChild(search);
     div.appendChild(btn); 
 
-    document.querySelector("#container").style.display = "flex";
-    let coins = [];
-    console.log(coins);
-    if(document.querySelector("#container").innerHTML !== " "){ 
-        hide(".placeHolder");
-        return;
-    }
-    show(".placeHolder");
     
     console.log(coins);
     if(coins.length === 0){

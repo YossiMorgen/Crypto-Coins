@@ -312,8 +312,17 @@ main > #container > .coin{
     z-index: -1;
 }
 
-/* chart */
+/* Live Report */
 #chartContainer{
-    height: 370px;
+    height: 20vh;
     width: 100%;
+    text-align: center;
+}
+
+#chartContainer > h2{
+    color: red;
+}
+
+#chartContainer a:hover{
+    display: none;
 }

@@ -333,14 +333,17 @@ main > #container > .coin{
     z-index: -1;
 }
 
-/* chart */
+/* Live Report */
 #chartContainer{
     height: 370px;
     width: 100%;
+    text-align: center;
 }
 
+#chartContainer > h2{
+    color: red;
+}
 
-/* Live Report */
 #chartContainer a:hover{
     display: none;
 }
