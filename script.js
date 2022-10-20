@@ -48,7 +48,7 @@ function about() {
     document.getElementById("about").innerHTML  = `<section id="about">
                 <h2>this is a crypto coin project for a college assignment </h2>
                 <div>my name is yossi and i built this project as js ajax jquery project</div>
-                <div>this project first show ".placeHolder"list of 100 coins toggle button and info button</div>
+                <div>this project first show a list of 100 coins with toggle button and info button</div>
                 <div>with the toggle button you'll be able to choose five coins to get even more information</div>
                 <img src="assets/climing.png" alt="">
             </section>` 
@@ -79,11 +79,13 @@ function about() {
         try {
             let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${coin[1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
             console.log("undefined " + result.USD + coin[1] );
+            console.log(new Date().getTime());
             if(typeof (result.USD) !== "undefined"){
                 data.push({
                     type: "spline",
                     name: coin[1],
                     showInLegend: true,
+                    // connectNullData: true,
                     xValueType: "dateTime",
                     xValueFormatString: "DD MMM hh:mm TT",
                     dataPoints: [{
@@ -110,7 +112,7 @@ function about() {
         axisX: {
             title: "States",
             labelFormatter: function ( e ) {
-                return e.value;  
+                return "time: " + e.value;  
             },
         },
         axisY: {
@@ -138,7 +140,7 @@ function about() {
         }
         e.chart.render();
     }
-        // let j = 0;
+        let j = 0;
         let interval = setInterval(() => {
             
                 try {
@@ -154,16 +156,17 @@ function about() {
                     console.log(error);
                 }
                 chart.render();
-                // j ++;
-                // if(j >= 3){
-                //     clearInterval(interval);
-                // }
+                j ++;
+                if(j >= 30){
+                    clearInterval(interval);
+                }
         }, 3000)
 }
 
 async function home() {
     let container = document.querySelector("#container");
     document.querySelector("#about").innerHTML = " ";
+
     let div = document.createElement("div");
     container.style.display = "flex";
     div.id = "search";
@@ -181,7 +184,7 @@ async function home() {
     })
     btn.addEventListener("click", ()=>{
         let inp = $("input").val();
-        if(inp.length < 15) {
+        if(inp.length < 2) {
             alert("Too Short");
             return;
         }
