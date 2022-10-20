@@ -2,7 +2,7 @@
 const url = new URL(window.location);
 moveTo(url.hash);
 // רציתי לקבוע פה את כל המערכים ולקרוא לכל האלמנטים אבל הבעיה שהפונקציות לא זיהו אותם
-window.addEventListener('popstate', e => moveTo(e.state.target))
+window.addEventListener('popstate', e => moveTo(e.state.target));
 let container = document.getElementById("container");
 
 function navTo(el) {
@@ -15,7 +15,7 @@ function navTo(el) {
 }
 
 function moveTo(target) {
-    hide("#chartContainer")
+    hide("#chartContainer");
     document.querySelector("#container").style.display = "none";
     document.querySelector("#about").innerHTML = " ";
     app.innerHTML = nav();
@@ -54,7 +54,7 @@ function about() {
             </section>` 
 }
 
-async function liveReport() {
+ function liveReport() {
     let infoArr = getInfo("fiveCoins");
     show("#chartContainer");
     let chartContainer = document.getElementById("chartContainer")
@@ -75,13 +75,14 @@ async function liveReport() {
     
     var data = [];
 	var chart;
-    for(let i = 0; i < infoArr.length; i++){
+    infoArr.forEach(async coin =>{
         try {
-            let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${infoArr[i][1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
-            if(typeof (result.USD) !=="undefined"){
+            let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${coin[1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
+            console.log("undefined " + result.USD + coin[1] );
+            if(typeof (result.USD) !== "undefined"){
                 data.push({
                     type: "spline",
-                    name: infoArr[i][1],
+                    name: coin[1],
                     showInLegend: true,
                     xValueType: "dateTime",
                     xValueFormatString: "DD MMM hh:mm TT",
@@ -94,7 +95,8 @@ async function liveReport() {
         } catch (error) {
             console.log(error);
         }
-    };
+    })
+       
     hide(".placeHolder")
     chart = new CanvasJS.Chart("chartContainer",{
         exportEnabled: true,
@@ -136,28 +138,26 @@ async function liveReport() {
         }
         e.chart.render();
     }
-        let j = 0;
-        let interval = setInterval(async() => {
-            for(let i = 0; i < infoArr.length; i++){
+        // let j = 0;
+        let interval = setInterval(() => {
+            
                 try {
-                    for (let i = 0; i < data.length; i++) {
-                        let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${infoArr[i][1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
-                        if(typeof (result.USD) !=="undefined"){
-                            data[i].dataPoints.push({
-                                x: new Date().getTime(),
-                                y: result.USD,
-                            })
-                        }
-                    }
+                    data.forEach(async coin =>{
+                        let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${coin.name}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
+                        coin.dataPoints.push({
+                            x: new Date().getTime(),
+                            y: result.USD,
+                        })
+
+                    })
                 } catch (error) {
                     console.log(error);
                 }
                 chart.render();
-                j ++;
-                if(j >= 3){
-                    clearInterval(interval);
-                }
-            }
+                // j ++;
+                // if(j >= 3){
+                //     clearInterval(interval);
+                // }
         }, 3000)
 }
 
