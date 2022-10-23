@@ -97,12 +97,13 @@ a:hover{
 
 #search{
     /* margin-left: 22%; */
+    margin-left: 6vw;
     display: inline-block;
 }
 
 #search > button{
     background-color: transparent;
-    border: 2px solid rgb(162, 240, 45);
+    /* border: 2px solid rgb(162, 240, 45); */
     color: rgb(162, 240, 45);
 }
 /* --------------------------------------------------- */
@@ -114,10 +115,11 @@ aside{
     background-color: pink;
     display: block;
     /* height: 10hw; */
-    width: 25vw;
-    min-width: 350px;
+    /* width: 25vw; */
+    margin: 5px;
+    max-width: 80%;
     /* min-height: 350px; */
-    margin-left: 25vw;
+    margin-left: 10%;
 }
 
 
@@ -142,20 +144,22 @@ aside > button:hover{
     border:  1px solid;
 }
 
+aside > section{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
 aside > section > div{
     padding: 1.5vw;
-    /* text-align: center; */
+    text-align: center;
     font-weight: bolder;
     background-color: pink;
     color: white;
     border: 1px dashed wheat;
-    /* height: 20%; */
+    height: 50%;
 }
 
 aside > section > div > button{
-    position: absolute;
-    right: 0;
-    /* margin-left: 8vw; */
     border: none;
     background-color: transparent;
     color: blue;

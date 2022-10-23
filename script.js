@@ -54,12 +54,12 @@ function about() {
             </section>` 
 }
 
- function liveReport() {
+async function liveReport() {
     let infoArr = getInfo("fiveCoins");
     show("#chartContainer");
     let chartContainer = document.getElementById("chartContainer")
     chartContainer.innerHTML = "";
-    if(infoArr.length === 0){
+    let placeHolder = () =>{
         hide(".placeHolder")
         let h2 = document.createElement("h2")
         h2.innerText = "you need to choose some coins from the home page"
@@ -68,16 +68,27 @@ function about() {
             document.getElementsByTagName("a")[0].click();
             chartContainer.removeChild(h2);
         })
-
+    }
+    if(infoArr.length === 0){
+        placeHolder();
         return;
     }
     show(".placeHolder");
     
     var data = [];
 	var chart;
+    // let str = "";
+    // infoArr.forEach(coin =>{
+    //     str += (coin[1] + ", ")
+    // })
+    // str = str.slice(0, -2)
+    // console.log(str);
+    // let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${str}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
+    // console.log(result);
+
     infoArr.forEach(async coin =>{
+        let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${coin[1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
         try {
-            let result = await getData(`https://min-api.cryptocompare.com/data/price?fsym=${coin[1]}&tsyms=USD&api_key=361e0baeba01d65a81b0c8405542b62e1392156c2c0a565b05fe50d9c8e016ea`);
             console.log("undefined " + result.USD + coin[1] );
             console.log(new Date().getTime());
             if(typeof (result.USD) !== "undefined"){
@@ -93,12 +104,18 @@ function about() {
                     y: result.USD,
                     }]
                 })
+            }else{
+                console.log("couldn't find any information about " + coin[1]);
             }
         } catch (error) {
             console.log(error);
         }
     })
-       
+    console.log(data.length);
+    // if(data.length === 0){
+    //     placeHolder();
+    //     return;
+    // }
     hide(".placeHolder")
     chart = new CanvasJS.Chart("chartContainer",{
         exportEnabled: true,

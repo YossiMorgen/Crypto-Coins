@@ -34,6 +34,7 @@ h1{
 }
 
 h1 + img{
+    z-index: 2;
     width: 10vw;
     position: absolute;
     right: -2px;
@@ -81,6 +82,7 @@ a{
 }
 
 a:hover{
+    /* box-sizing: border-box; */
     border: 1px solid blue;
     cursor: pointer;
 }
@@ -98,7 +100,8 @@ a:hover{
 #search{
     /* position: absolute; */
     /* right: 50vw; */
-    margin-left: 22%;
+    margin-left: 15vw;
+    z-index: 2;
     display: inline-block;
 }
 
@@ -120,6 +123,7 @@ aside{
     min-width: 350px;
     /* min-height: 350px; */
     margin-left: 25vw;
+    
 }
 
 
