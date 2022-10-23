@@ -117,9 +117,11 @@ aside{
     /* height: 10hw; */
     /* width: 25vw; */
     margin: 5px;
-    max-width: 80%;
+    max-height: 55vh;
+    width: 70%;
     /* min-height: 350px; */
-    margin-left: 10%;
+    margin-left: 15%;
+    overflow-y: scroll;
 }
 
 
@@ -145,12 +147,14 @@ aside > button:hover{
 }
 
 aside > section{
-    display: grid;
+    font-size: smaller;
+    /* overflow-y: scroll; */
+    /* display: grid; */
     grid-template-columns: auto auto auto;
 }
 
 aside > section > div{
-    padding: 1.5vw;
+    padding: 1px;
     text-align: center;
     font-weight: bolder;
     background-color: pink;
