@@ -1,7 +1,7 @@
 "use strict";
 const url = new URL(window.location);
 moveTo(url.hash);
-// רציתי לקבוע פה את כל המערכים ולקרוא לכל האלמנטים אבל הבעיה שהפונקציות לא זיהו אותם
+
 window.addEventListener('popstate', e => moveTo(e.state.target));
 let container = document.getElementById("container");
 
